@@ -41,7 +41,6 @@ ADD ./nginx/vhost.conf /etc/nginx/sites-available/default
 
 #SUPERVISOR
 ADD supervisor.conf /etc/supervisor/conf.d/supervisor.conf
-ADD init.sh /init.sh
 
 EXPOSE 80 443
 
