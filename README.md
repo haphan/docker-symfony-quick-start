@@ -1,18 +1,31 @@
-A self-sufficient Docker container to run simple Symfony applications.
+Docker container to run simple Symfony applications.
+
+## Provision
+
+Provision docker host machine locally an instance called `dev`
+
+```bash
+$ docker-machine create --driver virtualbox dev
+```
+Or provision it using AWS for `production` server. See list of [supported driver](https://docs.docker.com/machine/drivers/)
+
+```bash
+$ docker-machine create --driver amazonec2 --amazonec2-access-key AKI******* --amazonec2-secret-key 8T93C********* --amazonec2-vpc-id vpc-****** production
+```
+
+Pointing docker client to the `dev` instance
+```bash
+$ eval "$(docker-machine env dev)"
+```
 
 ## Usage
 
-```
-$ docker run -itP \
-    -v $PWD:/srv \
-    -e DB_NAME=somedbname \
-    -e INIT=bin/reload \
-    ubermuda/symfony
+Build image and deploy to docker host
+```bash
+$ docker build -t haphan/sf2-app-server .
+$ docker run -itP -v $PWD:/srv -p 80:80 haphan/sf2-app-server
 ```
 
-## Parameters
+## FAQ
 
-Configuration is done through environment variables that you can change with `docker run`' s `-e` switch:
-
-* `DB_NAME`, the database name. Defaults to `symfony`.
-* `INIT`, path to a initialization script (eg: creating db tables, etc). Ignored if empty.
+Coming soon
